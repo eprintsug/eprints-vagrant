@@ -71,11 +71,13 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     sudo useradd --system --user-group --create-home eprints
+    sudo yum -y install epel-release
+    sudo yum -y install deltarpm
     sudo yum -y install perl
     sudo yum -y install wget
     sudo yum -y install lynx
-    sudo yum -y groups mark convert
     sudo yum -y group update
+    sudo yum -y groups mark convert
     sudo yum -y groupinstall "Development Tools"
     sudo yum -y install antiword
     sudo yum -y install poppler poppler-utils
@@ -84,29 +86,33 @@ Vagrant.configure(2) do |config|
     sudo yum -y install glib-devel
     sudo yum -y install "glib2-devel.*"
     sudo yum -y install libxml2
+    sudo yum -y install libxslt
     sudo yum -y install libxml2-devel
-    sudo yum install gdome2 gdome2-devel
+    sudo yum -y install libxslt-devel
+    sudo yum -y install gdome2
+    sudo yum -y install gdome2-devel
     sudo yum -y install httpd
-    sudo /sbin/chkconfig httpd on
     sudo yum -y install mysql-server
-    sudo /sbin/chkconfig mysqld on
-    sudo yum -y install mod_perl
+    sudo yum -y install perl
+    sudo yum -y install perl-YAML
     sudo yum -y install perl-CPAN
+    sudo yum -y install mod_perl
+    sudo yum -y install perl-CGI
+    sudo yum -y install perl-libxml-perl
     sudo yum -y install perl-DBI
     sudo yum -y install perl-DBD-MySQL
+    sudo yum -y install perl-XML-NamespaceSupport
+    sudo yum -y install perl-XML-SAX
+    sudo yum -y install perl-XML-SAX-Base
+    sudo yum -y install perl-XML-SAX-Writer
+    sudo yum -y install perl-XML-Simple
     sudo yum -y install perl-XML-DOM
-    sudo cpan -i Data::ShowTable
-    sudo cpan -i MIME::Base64
-    sudo cpan -i Mail::Address
-    sudo cpan -i MIME::Types
-    sudo cpan -i MIME::Lite
-    sudo cpan -i Unicode::String
-    sudo cpan -i Term::ReadKey
-    sudo cpan -i Readonly
-    sudo cpan -i XML::LibXML
-    sudo cpan -i CGI
-    sudo cpan -i XML-LibXML-Common
-    sudo cpan -i XML-NamespaceSupport
-    sudo cpan -i XML-GDOME
+    sudo yum -y install perl-XML-LibXML
+    sudo yum -y install perl-XML-LibXSLT
+    sudo yum -y install perl-MIME-Types
+    sudo yum -y install perl-MIME-Lite
+    sudo yum -y install perl-Unicode-String
+    sudo yum -y install perl-TermReadKey
+    sudo yum -y install perl-Readonly
   SHELL
 end
