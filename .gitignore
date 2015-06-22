@@ -1,3 +1,6 @@
-.vagrant
 .DL_Store
 *~
+.vagrant
+log/
+user-data
+config.rb
