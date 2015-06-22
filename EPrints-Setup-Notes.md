@@ -1,51 +1,27 @@
 
- From here may require hand installation until an Image of this is saved.
- perl -MCPAN -e shell <<EOT
-    yes
-    sudo
-    yes
-    install Data::ShowTable
-    install MIME::Base64
-    install Mail::Address
-    install MIME::Types
-    install MIME::Lite
-    install Unicode::String
-    install Term::ReadKey
-    install Readonly
-    install XML::LibXML
-    install CGI
-    exit
-EOT
+# Random notes
+
+## Manual installation steps
 
 
- FIXME: gdome2 fails to compile/install do to dependencies
- instructions can be found at: http://wiki.eprints.org/w/Installing_GDOME_on_Fedora_Core_3
+```shell
+    cpan # Answer: yes, sudo, yes
+    echo "install Data::ShowTable" | perl -MCPAN -e shell
+    echo "install MIME::Base64" | perl -MCPAN -e shell
+    echo "install Mail::Address" | perl -MCPAN -e shell
+```
 
- [vagrant@localhost ~]$ sudo rpm -Uvh gdome2-0.8.1-1.i386.rpm gdome2-devel-0.8.1-1.i386.rpm
- error: Failed dependencies:
-   ld-linux.so.2 is needed by gdome2-0.8.1-1.i386
-   libc.so.6 is needed by gdome2-0.8.1-1.i386
-   libglib-2.0.so.0 is needed by gdome2-0.8.1-1.i386
-   libm.so.6 is needed by gdome2-0.8.1-1.i386
-   libpthread.so.0 is needed by gdome2-0.8.1-1.i386
-   libxml2.so.2 is needed by gdome2-0.8.1-1.i386
-   libz.so.1 is needed by gdome2-0.8.1-1.i386
-   libc.so.6(GLIBC_2.0) is needed by gdome2-0.8.1-1.i386
-   libc.so.6(GLIBC_2.1.3) is needed by gdome2-0.8.1-1.i386
-   glib2-devel >= 2.2.0 is needed by gdome2-devel-0.8.1-1.i386
-   libxml2-devel >= 2.4.26 is needed by gdome2-devel-0.8.1-1.i386
+## GDome may not be required
 
-    wget http://gdome2.cs.unibo.it/rpm/gdome2-0.8.1-1.i386.rpm
-    wget http://gdome2.cs.unibo.it/rpm/gdome2-devel-0.8.1-1.i386.rpm
-    rpm -Uvh gdome2-0.8.1-1.i386.rpm gdome2-devel-0.8.1-1.i386.rpm
-    mkdir -p /usr/local/build
-    cd /usr/local/build
-    wget http://cpan.uwinnipeg.ca/cpan/authors/id/T/TJ/TJMATHER/XML-GDOME-0.86.tar.gz
-    tar xzvf XML-GDOME-0.86.tar.gz
-    cd XML-GDOME-0.86
-    perl Makefile.PL
-    make
-    make install
+GDome fails to build with CentOS 7 but the documentation indicates this may not be [required (See top of page)](http://wiki.eprints.org/w/Required_software). If GDome is needed then the Wiki has a page [Installing GDOME on Redhat 7](http://wiki.eprints.org/w/Installing_GDOME_on_Redhat_7) maybe helpful.
+
+## Next Steps
+
+The EPrints installation itself should be automated if possible.
+
+These are some possible steps after Perl if fully configured (e.g. if GDOME is needed, it needs to have been installed successfully)
+
+```shell
     cd /usr/local/build
     wget http://files.eprints.org/130/01/eprints-3.0-rc-1.tar.gz
     tar xzvf eprints-3.0-rc-1.tar.gz
@@ -61,4 +37,5 @@ EOT
     ln -s /var/lib/eprints3/bin/epindexer /etc/init.d/epindexer
     /sbin/chkconfig -add epindexer
     /sbin/chkconfig epindexer on
+```
 
