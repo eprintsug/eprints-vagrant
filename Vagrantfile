@@ -23,12 +23,14 @@ Vagrant.configure(2) do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.network "forwarded_port", guest: 80, host:8080
-  config.vm.network "forwarded_port", guest: 443, host:8443
+  #config.vm.network "forwarded_port", host:8080, guest: 80
+  #config.vm.network "forwarded_port", host:8443, guest: 443
+
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "private_network", type: "dhcp"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -148,5 +150,7 @@ Vagrant.configure(2) do |config|
     echo "\tsudo chcon -R -h -t httpd_sys_script_rw_t /usr/share/eprints/archives/test-demo/documents/"
     echo "\tsudo chcon -R -h -t httpd_sys_script_rw_t /usr/share/eprints/var/"
     echo "See http://wiki.eprints.org/w/Installing_EPrints_3_via_Redhat_RPM for more info."
+    echo "Network was configured as private with an ip of 192.168.33.100"
+    echo ""
   SHELL
 end

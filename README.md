@@ -9,6 +9,7 @@ These instructions are what I followed on my Mac OS X box.
 + Install VirtualBox
 + Install Vagrant
 + clone eprints-vagrant repo
+    + By default the Vagrant file defines a private network with IP of 192.168.33.100
 + change directory to eprints-vagrant
 + run "vagrant up" to create the box and provision
 + run "vagrant ssh" to finish MySQL and EPrints setup
@@ -29,10 +30,9 @@ the setup of MySQL as well as creating an initial EPrints instance.
     exit
     sudo /sbin/service httpd stop
     sudo /sbin/service httpd start
-    w3m http://localhost
 ```
 
-Additional Apache setup will be needed depending on your configuration choices.
+Additional Apache setup will be needed depending on your configuration choices. 
 
 
 ## EPrints notes
