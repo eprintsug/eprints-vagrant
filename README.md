@@ -27,13 +27,12 @@ the setup of MySQL as well as creating an initial EPrints instance.
     cd
     ./bin/epadmin create
     exit
-    sudo /sbin/service httpd stop
-    sudo /sbin/service httpd start
+    sudo /sbin/service httpd restart
 ```
 
 Additional Apache setup will be needed depending on your configuration choices.
-I also added the DHCP assigned ip in my vagrant instance to my /etc/hosts file
-to get the virtual hostname friendly in my Mac's web browser.
+I updated my local /etc/hosts on the host machine to reflect the virtual hostname
+I assigned in the *epadmin create* process.
 
 
 ## EPrints notes
