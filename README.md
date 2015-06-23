@@ -1,6 +1,6 @@
 # eprints-vagrant
 
-A vagrant setup for working on EPrints related code.
+A vagrant setup for working on EPrints 3.3 on CentOS 7.
 
 ## EPrints notes
 
