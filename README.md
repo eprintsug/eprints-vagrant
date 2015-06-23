@@ -6,7 +6,7 @@ A vagrant setup for working on EPrints 3.3 on CentOS 7.
 
 These instructions are what I followed on my Mac OS X box.
 
-+ Install VirtualBox 
++ Install VirtualBox
 + Install Vagrant
 + clone eprints-vagrant repo
 + change directory to eprints-vagrant
@@ -14,7 +14,7 @@ These instructions are what I followed on my Mac OS X box.
 + run "vagrant ssh" to finish MySQL and EPrints setup
 
 Here is an example of running the git, vagrant and various shell commands to finish
-the setup of MySQL as well as creating an initial EPrints istance.
+the setup of MySQL as well as creating an initial EPrints instance.
 
 ```shell
     git clone git@github.com:rsdoiel/eprints-vagrant.git
@@ -32,6 +32,7 @@ the setup of MySQL as well as creating an initial EPrints istance.
     w3m http://localhost
 ```
 
+Additional Apache setup will be needed depending on your configuration choices.
 
 
 ## EPrints notes
@@ -45,5 +46,4 @@ the setup of MySQL as well as creating an initial EPrints istance.
 + [Antiword](http://www.winfield.demon.nl/) is needed as an rpm for EPrints 3.3.x.
     + rpm at [pkgs.repoforge.org/antiword/antiword-0.37-3.rf.src.rpm](http://pkgs.repoforge.org/antiword/antiword-0.37-3.rf.src.rpm)
         + [Install Instructions](http://pkgs.org/centos-7/forensics-x86_64/antiword-0.37-9.el7.x86_64.rpm.html)
-    + also at [rpm.pbone.net/index.php3/stat/3/srodzaj/2/search/antiword-0.37-9.el7.src.rpm](http://rpm.pbone.net/index.php3/stat/3/srodzaj/2/search/antiword-0.37-9.el7.src.rpm)
 + Digital Ocean article [Adding MySQL to CentOS 7](https://www.digitalocean.com/community/questions/can-t-install-mysql-on-centos-7)
