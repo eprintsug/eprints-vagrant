@@ -38,6 +38,7 @@ Vagrant.configure(2) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
+  config.vm.synced_folder ".", "/home/vagrant/share"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -70,11 +71,12 @@ Vagrant.configure(2) do |config|
   # SHELL
 
   config.vm.provision "shell", inline: <<-SHELL
-    sudo useradd --system --user-group --create-home eprints
+    # Setup the base system with development tools
     sudo yum -y install epel-release
     sudo yum -y install deltarpm
     sudo yum -y install perl
     sudo yum -y install wget
+    sudo yum -y install w3m
     sudo yum -y install lynx
     sudo yum -y group update
     sudo yum -y groups mark convert
@@ -91,9 +93,12 @@ Vagrant.configure(2) do |config|
     sudo yum -y install libxslt-devel
     sudo yum -y install gdome2
     sudo yum -y install gdome2-devel
-    sudo yum -y install httpd
+    # Setup and install MySQL server from Oracle.
+    sudo rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
     sudo yum -y install mysql-server
-    sudo yum -y install perl
+    # Setup and install Apache2
+    sudo yum -y install httpd
+    # Setup and install Perl as needed by EPrints
     sudo yum -y install perl-YAML
     sudo yum -y install perl-CPAN
     sudo yum -y install mod_perl
@@ -114,5 +119,23 @@ Vagrant.configure(2) do |config|
     sudo yum -y install perl-Unicode-String
     sudo yum -y install perl-TermReadKey
     sudo yum -y install perl-Readonly
+    # install Antiword from an rpm required EPrints 3.3
+    wget https://forensics.cert.org/cert-forensics-tools-release-el7.rpm
+    sudo rpm -Uvh cert-forensics-tools-release*rpm
+    sudo yum --enablerepo=forensics install antiword
+    # now instal EPrints3
+    sudo rpm -ivh http://rpm.eprints.org/rpm-eprints-org-key-1-1.noarch.rpm
+    sudo rpm -ivh http://rpm.eprints.org/eprints/noarch/rpm-eprints-org-1-1.noarch.rpm
+    sudo yum -y upgrade libxml2 libxslt perl-XML-LibXML perl-XML-LibXSLT
+    sudo yum -y install eprints
+    echo "Start mysql: sudo /sbin/service mysqld start"
+    echo "Secure MySQL: sudo mysql_secure_installation"
+    echo "You should now be ready to run epadmin to create repositories"
+    echo "E.g. sudo su eprints"
+    echo "After creating your repostiory you many need to run chcon for SELinux"
+    echo "to allow Apache access to the appropraite directories. E.g. "
+    echo "\tsudo chcon -R -h -t httpd_sys_script_rw_t /usr/share/eprints/archives/test-demo/documents/"
+    echo "\tsudo chcon -R -h -t httpd_sys_script_rw_t /usr/share/eprints/var/"
+    echo "See http://wiki.eprints.org/w/Installing_EPrints_3_via_Redhat_RPM for more info."
   SHELL
 end
