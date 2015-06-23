@@ -34,6 +34,8 @@ Additional Apache setup will be needed depending on your configuration choices.
 I updated my local /etc/hosts on the host machine to reflect the virtual hostname
 I assigned in the *epadmin create* process.
 
+See [ADDITIONAL-SETUP.md](docs/ADDITIONAL-SETUP.md) for more details.
+
 
 ## EPrints notes
 
