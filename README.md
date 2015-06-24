@@ -4,25 +4,43 @@ A vagrant setup for working with EPrints 3.3 on CentOS 7.
 
 ## Install
 
-These instructions are what I followed on my Mac OS X box.
+Steps I followed on my Mac OS X box to get EPrints 3.3. up.
 
-+ Install VirtualBox
-+ Install Vagrant
-+ clone eprints-vagrant repo
-+ change directory to eprints-vagrant
-+ run "vagrant up" to create the box and provision
-+ run "vagrant ssh" to finish MySQL and EPrints setup
+1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+2. Install [Vagrant](https://www.vagrantup.com/downloads.html)
+3. Clone rsdoiel/eprints-vagrant Github repository
+4. Change directory to eprints-vagrant
+5. Run "vagrant up" to create the box and provision
+6. Run "vagrant ssh" to finish MySQL and EPrints setup
+7. Start MySQL on the guest machine
+8. Run the interactive *mysql_secure_installation* script to secure MySQL
+9. Run *mysql_secure_installation* to secure MySQL on the guest machine
+10. Become the *eprints* user
+11. Create an EPrints repository
+12. Stop being the *eprints* user
+13. Restart Apache on the guest machine
 
-Here is an example of running the git, vagrant and various shell commands to finish
-the setup of MySQL as well as creating an initial EPrints instance.
+Steps 1 and 2 are your typical Mac app install (e.g. go to the website, download
+the dmg/pkg and install those apps).
+
+Here are the shell commands for steps 3 through 6.
 
 ```shell
-    git clone git@github.com:rsdoiel/eprints-vagrant.git
-    cd eprints-vagrants
-    vagrant up && vagrant ssh
+    git clone https://github.com/rsdoiel/eprints-vagrant.git
+    cd eprints-vagrant
+    vagrant up
+    vagrant ssh
+```
+
+At this stage you could follow along in Adam Field's training video
+[Training Video: EPrints Install](http://wiki.eprints.org/w/Training_Video:EPrints_Install).
+
+You could also run the following commands as I did on my Mac from my guest machine
+(i.e. your ssh session from step 6)
+
+```shell
     sudo /sbin/service mysqld start
     sudo mysql_secure_installation
-    exit
     sudo su eprints
     cd
     ./bin/epadmin create
@@ -30,34 +48,35 @@ the setup of MySQL as well as creating an initial EPrints instance.
     sudo /sbin/service httpd restart
 ```
 
-Additional Apache setup may be needed depending on your configuration choices.
-I needed to update my /etc/hosts file on my host machine so I could access the created
-virtual host from the web browser on my host machine. To set this correctly I needed
-to know the IP address assigned by DHCP on the guest machine. You can find how that by
-doing the following
+At this point you have an empty EPrints repository running on the guest machine.
+You can access this from your host machine web browser with a little more work.
+You need to add an entry to your */etc/hosts* file so that your guest machines
+virtual hostname will be accessible from your host machines web browser. Before
+you can do that you need to know the IP address assigned by DHCP to your guest
+machine. This can be done by ssh-ing into your guest machine and running ifconfig.
 
 ```shell
     vagrant ssh
     ifconfig
 ```
 
-Reading through the out put of *ifconfig* shows the IP address assigned (mine was the second
-one listed). If the IP assigned was 172.28.128.3 then I would add and entry to my host file
-similar too
+Read the output of *ifconfig* and find the assigned IP address. On my guest
+machine it was assigned 172.28.128.3, yours will be different. It was the second
+entry reported by *ifconfig*.  I had named my new repository "mydemo"
+on host "eprints-dev.local" so I added the following entry to */etc/hosts*.
 
 ```shell
     172.28.128.3 mydemo.eprints-dev.local
 ```
 
-This way pointing my web browser on my host machine at http://mydemo.eprints-dev.local pulls up my newly
-defined repository.  The EPrints wiki video, [Training Video: EPrints Install](http://wiki.eprints.org/w/Training_Video:EPrints_Install), 
-shows this at about four minutes in.
-
+Adam Field walks you your my steps 7 through 13 in the EPrints wiki video
+[Training Video: EPrints Install](http://wiki.eprints.org/w/Training_Video:EPrints_Install).
+The */etc/hosts* is discussed at about four minutes and nineteen seconds.
 
 See [ADDITIONAL-SETUP.md](docs/ADDITIONAL-SETUP.md) for more notes.
 
 
-## EPrints notes
+## General EPrints pages
 
 + [EPrints](https://github.com/eprints/eprints)
 + [Required software](http://wiki.eprints.org/w/Required_software)
