@@ -1,6 +1,6 @@
 # eprints-vagrant
 
-A vagrant setup for working on EPrints 3.3 on CentOS 7.
+A vagrant setup for working with EPrints 3.3 on CentOS 7.
 
 ## Install
 
@@ -30,11 +30,31 @@ the setup of MySQL as well as creating an initial EPrints instance.
     sudo /sbin/service httpd restart
 ```
 
-Additional Apache setup will be needed depending on your configuration choices.
-I updated my local /etc/hosts on the host machine to reflect the virtual hostname
-I assigned in the *epadmin create* process.
+Additional Apache setup may be needed depending on your configuration choices.
+I needed to update my /etc/hosts file on my host machine so I could access the created
+virtual host from the web browser on my host machine. To set this correctly I needed
+to know the IP address assigned by DHCP on the guest machine. You can find how that by
+doing the following
 
-See [ADDITIONAL-SETUP.md](docs/ADDITIONAL-SETUP.md) for more details.
+```shell
+    vagrant ssh
+    ifconfig
+```
+
+Reading through the out put of *ifconfig* shows the IP address assigned (mine was the second
+one listed). If the IP assigned was 172.28.128.3 then I would add and entry to my host file
+similar too
+
+```shell
+    172.28.128.3 mydemo.eprints-dev.local
+```
+
+This way pointing my web browser on my host machine at http://mydemo.eprints-dev.local pulls up my newly
+defined repository.  The EPrints wiki video, [Training Video: EPrints Install](http://wiki.eprints.org/w/Training_Video:EPrints_Install), 
+shows this at about four minutes in.
+
+
+See [ADDITIONAL-SETUP.md](docs/ADDITIONAL-SETUP.md) for more notes.
 
 
 ## EPrints notes
