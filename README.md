@@ -73,7 +73,7 @@ Adam Field walks you your my steps 7 through 13 in the EPrints wiki video
 [Training Video: EPrints Install](http://wiki.eprints.org/w/Training_Video:EPrints_Install).
 The */etc/hosts* is discussed at about four minutes and nineteen seconds.
 
-See [ADDITIONAL-SETUP.md](docs/ADDITIONAL-SETUP.md) for more notes.
+[Additional setup and troubleshooting info](docs/ADDITIONAL-SETUP.md) in docs folder.
 
 
 ## General EPrints pages
