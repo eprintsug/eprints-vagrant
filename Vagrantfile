@@ -139,22 +139,23 @@ Vagrant.configure(2) do |config|
     # now instal EPrints3
     sudo rpm -ivh http://rpm.eprints.org/rpm-eprints-org-key-1-1.noarch.rpm
     sudo rpm -ivh http://rpm.eprints.org/eprints/noarch/rpm-eprints-org-1-1.noarch.rpm
-    sudo yum -y upgrade libxml2 libxslt perl-XML-LibXML perl-XML-LibXSLT
+    #sudo yum -y upgrade libxml2 libxslt perl-XML-LibXML perl-XML-LibXSLT
+    sudo yum -y upgrade
     sudo yum -y install eprints
-    echo "Start mysql: sudo /sbin/service mysqld start"
-    echo "Secure MySQL: sudo mysql_secure_installation"
-    echo "You should now be ready to run epadmin to create repositories"
-    echo "E.g. sudo su eprints"
-    echo "After creating your repostiory you many need to run chcon for SELinux"
-    echo "to allow Apache access to the appropraite directories. E.g. "
-    echo "\tsudo chmod -R 770 /usr/share/eprints/var/"
-    echo "\tsudo chmod -R 770 /usr/share/eprints/lib/"
-    echo "\tsudo chmod -R 770 /usr/share/eprints/archives/[REPO_NAME_GOES_HERE]/documents/"
-    echo "\tsudo chcon -R -h -t httpd_sys_script_rw_t /usr/share/eprints/archives/[REPO_NAME_GOES_HERE]/documents/"
-    echo "\tsudo chcon -R -h -t httpd_sys_script_rw_t /usr/share/eprints/var/"
-    echo "\tsudo chcon -R -h -t httpd_sys_script_rw_t /usr/share/eprints/lib/"
-    echo "See http://wiki.eprints.org/w/Installing_EPrints_3_via_Redhat_RPM for more info."
-    echo "Network was configured as private with an ip of 192.168.33.100"
+    # for setup convienence add vagrant to the eprints group.
+    sudo usermod vagrant -G vagrant,eprints
     echo ""
+    echo "\tThree more setup scripts left."
+    echo "\tvagrant ssh and run the final setup scripts one through three.\n"
+    echo ""
+    echo "\t (as vagrant): bash share/1-final-setup.sh"
+    echo "\t (as vagrant): sudo su eprints"
+    echo "\t (as eprints): bash $HOME/2-final-setup.sh"
+    echo "\t (as eprints): exit "
+    echo "\t (as vagrant): cd"
+    echo "\t (as vagrant): bash share/3-final-setup.sh"
+    echo ""
+    echo "\tor see Adam Field's turtorial at "
+    echo "\t\thttp://wiki.eprints.org/w/Training_Video:EPrints_Install"
   SHELL
 end
