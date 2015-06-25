@@ -20,24 +20,30 @@ function assertUsername {
 }
 
 function fixPermissions {
-    ERINTS_HOME=$(grep eprints /etc/passwd | cut -d : -f 6)
+    EPRINTS_HOME=$(grep eprints /etc/passwd | cut -d : -f 6)
     # fix perms
     sudo chmod -R 770 $EPRINTS_HOME/var/
 	sudo chcon -R -h -t httpd_sys_script_rw_t $EPRINTS_HOME/var/
     sudo chmod -R 770 $EPRINTS_HOME/lib/
     sudo chcon -R -h -t httpd_sys_script_rw_t $EPRINTS_HOME/lib/
-    find $EPRINTS_HOME -maxdepth 1 -type d | while read ITEM; do
-        sudo chmod -R 770 $ITEM
-        sudo chcon -R -h -t httpd_sys_script_rw_t $ITEM/documents
+    cd $EPRINTS_HOME
+    find archives/ -maxdepth 1 -type d | while read ITEM; do
+        if [ "$ITEM" != "archives/" ]; then
+            echo "Updating settings for "$ITEM"/documents"
+            sudo chmod -R 770 "$ITEM"/documents
+            sudo chcon -R -h -t httpd_sys_script_rw_t "$ITEM"/documents
+        fi
     done
 }
 
 function reportIPForHostSetup {
     echo "Find your IP address visible to your vagrant host."
     ifconfig
-    echo "Add your eprints repository virtual host infor to /etc/hosts on"
-    echo "your host machine."
-    echo "See http://wiki.eprints.org/w/Training_Video:EPrints_Install for an installation tutorial"
+    echo "Don't forget to add your eprints repository virtual host info"
+    echo "to /etc/hosts on your vagrant host machine."
+    echo ""
+    echo "See http://wiki.eprints.org/w/Training_Video:EPrints_Install"
+    echo "at about 4 minutes 20 seconds of the installation tutorial."
     exit 0
 }
 

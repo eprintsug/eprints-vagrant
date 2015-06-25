@@ -25,11 +25,16 @@ function setupEPrintsRepository {
     echo "EPrints installed in directory: "$(pwd)
     # create your first repository
     ./bin/epadmin create
-    echo "Hopefully you have created your first repository succeessfully, exiting eprints user"
+    echo "Hopefully you have created your first repository succeessfully."
+    echo "Remember the virtual hostname you entered for later."
 }
 
 function setupStep3 {
+    echo ""
     echo "Exit session and return to the vagrant user."
+    echo "Then run share/final-setup.sh, E.g."
+    echo "    exit"
+    echo "    bash share/3-final-setup.sh"
     exit 0
 }
 
