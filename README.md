@@ -1,3 +1,4 @@
+
 # eprints-vagrant
 
 A vagrant setup for working with EPrints 3.3 on CentOS 7.
@@ -12,16 +13,12 @@ Steps I followed on my Mac OS X box to get EPrints 3.3. up.
 4. Change directory to eprints-vagrant
 5. Run "vagrant up" to create the box and provision
 6. Run "vagrant ssh" to finish MySQL and EPrints setup
-7. Start MySQL on the guest machine
-8. Run the interactive *mysql_secure_installation* script to secure MySQL
-9. Run *mysql_secure_installation* to secure MySQL on the guest machine
-10. Become the *eprints* user
-11. Create an EPrints repository
-12. Stop being the *eprints* user
-13. Restart Apache on the guest machine
+7. Run "bash share/1-final-setup.sh" (this finishes the MySQL setup and prep)
+8. Switch the eprints user and run "bash 2-final-setup.sh" (configures a new eprints repository)
+9. Switch back to the vagrant user and run "bash share/3-final-setup.sh" (final permission cleanup and apache restart)
 
 Steps 1 and 2 are your typical Mac app install (e.g. go to the website, download
-the dmg/pkg and install those apps).
+the dmg/pkg and install those apps). The rest of run from my Mac's Terminal app.
 
 Here are the shell commands for steps 3 through 6.
 
@@ -32,21 +29,11 @@ Here are the shell commands for steps 3 through 6.
     vagrant ssh
 ```
 
-At this stage you could follow along in Adam Field's training video
+At this stage you could finish setting up MySQL and follow Adam Field's training video
 [Training Video: EPrints Install](http://wiki.eprints.org/w/Training_Video:EPrints_Install).
+Or user the 1-final-setup.sh, 2-final-setup.sh and 3-final-setup.sh scripts in this
+repository.
 
-You could also run the following commands as I did on my Mac from my guest machine
-(i.e. your ssh session from step 6)
-
-```shell
-    sudo /sbin/service mysqld start
-    sudo mysql_secure_installation
-    sudo su eprints
-    cd
-    ./bin/epadmin create
-    exit
-    sudo /sbin/service httpd restart
-```
 
 At this point you have an empty EPrints repository running on the guest machine.
 You can access this from your host machine web browser with a little more work.
@@ -66,14 +53,14 @@ entry reported by *ifconfig*.  I had named my new repository "mydemo"
 on host "eprints-dev.local" so I added the following entry to */etc/hosts*.
 
 ```shell
-    172.28.128.3 mydemo.eprints-dev.local
+    172.28.128.3 eprints-dev.local mydemo.eprints-dev.local
 ```
 
-Adam Field walks you your my steps 7 through 13 in the EPrints wiki video
+Adam Field talks about accesing updating */etc/hosts* in the EPrints wiki video
 [Training Video: EPrints Install](http://wiki.eprints.org/w/Training_Video:EPrints_Install).
 The */etc/hosts* is discussed at about four minutes and nineteen seconds.
 
-[Additional setup and troubleshooting info](docs/ADDITIONAL-SETUP.md) in docs folder.
+[Additional setup, notes and troubleshooting info](docs/ADDITIONAL-SETUP.md) in docs folder.
 
 
 ## General EPrints pages
