@@ -28,7 +28,7 @@ function setupMySQL {
     read Y_OR_N
 
     if [ "$Y_OR_N" = "" ] || [ "$Y_OR_N" = "y" ] || [ "$Y_OR_N" = "Y" ]; then
-        sudo systemctl mysqld.service start
+        sudo systemctl start mysqld.service
         sudo mysql_secure_installation
         sudo systemctl enable mysqld.service
     else

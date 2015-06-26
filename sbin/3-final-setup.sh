@@ -49,8 +49,8 @@ function reportIPForHostSetup {
 
 
 # restart apache
+sudo systemctl restart httpd.service
 sudo systemctl enable httpd.service
-sudo systemctl httpd.service restart
 
 #
 # Main
