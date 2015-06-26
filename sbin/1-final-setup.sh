@@ -28,7 +28,7 @@ function setupMySQL {
     read Y_OR_N
 
     if [ "$Y_OR_N" = "" ] || [ "$Y_OR_N" = "y" ] || [ "$Y_OR_N" = "Y" ]; then
-        sudo /sbin/service mysqld start
+        sudo systemctl mysqld start
         sudo mysql_secure_installation
     else
         echo "Skipping MySQL setup."
@@ -38,11 +38,12 @@ function setupMySQL {
 function setupStep2 {
     EPRINTS_HOME=$(grep eprints /etc/passwd | cut -d : -f 6)
     # Add vagrant to the eprints user group as a convienence
-    sudo cp share/2-final-setup.sh $EPRINTS_HOME/
+    sudo cp sbin/2-final-setup.sh $EPRINTS_HOME/
     sudo chown eprints.eprints $EPRINTS_HOME/2-final-setup.sh
     echo "become the eprints user, run $EPRINTS_HOME/2-final-setup.sh"
     echo "E.g."
     echo "    sudo su eprints"
+    echo "    cd"
     echo "    bash $EPRINTS_HOME/2-final-setup.sh"
     echo ""
     exit 0

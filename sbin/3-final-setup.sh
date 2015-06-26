@@ -49,7 +49,7 @@ function reportIPForHostSetup {
 
 
 # restart apache
-sudo /sbin/service httpd restart
+sudo systemctl httpd restart
 
 #
 # Main

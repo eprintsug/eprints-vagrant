@@ -32,9 +32,9 @@ function setupEPrintsRepository {
 function setupStep3 {
     echo ""
     echo "Exit session and return to the vagrant user."
-    echo "Then run share/final-setup.sh, E.g."
+    echo "Then run sbin/3-final-setup.sh, E.g."
     echo "    exit"
-    echo "    bash share/3-final-setup.sh"
+    echo "    bash sbin/3-final-setup.sh"
     exit 0
 }
 
