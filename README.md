@@ -13,9 +13,9 @@ Steps I followed on my Mac OS X box to get EPrints 3.3. up.
 4. Change directory to eprints-vagrant
 5. Run "vagrant up" to create the box and provision
 6. Run "vagrant ssh" to finish MySQL and EPrints setup
-7. Run "bash share/1-final-setup.sh" (this finishes the MySQL setup and prep)
+7. Run "bash bin/1-final-setup.sh" (this finishes the MySQL setup and prep)
 8. Switch the eprints user and run "bash 2-final-setup.sh" (configures a new eprints repository)
-9. Switch back to the vagrant user and run "bash share/3-final-setup.sh" (final permission cleanup and apache restart)
+9. Switch back to the vagrant user and run "bash bin/3-final-setup.sh" (final permission cleanup and apache restart)
 
 Steps 1 and 2 are your typical Mac app install (e.g. go to the website, download
 the dmg/pkg and install those apps). The rest of run from my Mac's Terminal app.

@@ -42,7 +42,7 @@ Vagrant.configure(2) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
-  config.vm.synced_folder ".", "/home/vagrant/share"
+  config.vm.synced_folder "./final-setup", "/home/vagrant/bin"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -148,12 +148,12 @@ Vagrant.configure(2) do |config|
     echo "\tThree more setup scripts left."
     echo "\tvagrant ssh and run the final setup scripts one through three.\n"
     echo ""
-    echo "\t (as vagrant): bash share/1-final-setup.sh"
+    echo "\t (as vagrant): bash bin/1-final-setup.sh"
     echo "\t (as vagrant): sudo su eprints"
     echo "\t (as eprints): bash $HOME/2-final-setup.sh"
     echo "\t (as eprints): exit "
     echo "\t (as vagrant): cd"
-    echo "\t (as vagrant): bash share/3-final-setup.sh"
+    echo "\t (as vagrant): bash bin/3-final-setup.sh"
     echo ""
     echo "\tor see Adam Field's turtorial at "
     echo "\t\thttp://wiki.eprints.org/w/Training_Video:EPrints_Install"
