@@ -1,3 +1,12 @@
+**Note: when running this from a Windows host the three sbin/... scripts didn't run due to the line endings.**
+I resolved this by changing the line endings in vi:
+``` 
+> vi sbin/1-final-setup.sh
+        :set ff=unix
+        :wq
+```        
+There's probably a better way to achieve this.
+
 
 # eprints-vagrant
 
