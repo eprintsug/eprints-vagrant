@@ -10,7 +10,7 @@ There's probably a better way to achieve this.
 
 # eprints-vagrant
 
-A vagrant setup for working with EPrints 3.3 on CentOS 7.
+A vagrant setup for working with EPrints 3.3 on CentOS 7.1.
 
 ## Install
 
